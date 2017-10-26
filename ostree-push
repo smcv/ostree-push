@@ -299,7 +299,7 @@ class OSTreePusher(object):
         if self.remote_user:
             ssh_cmd += ['-l', self.remote_user]
         if self.remote_port:
-            ssh_cmd += ['-p', self.remote_port]
+            ssh_cmd += ['-p', str(self.remote_port)]
         ssh_cmd += [self.remote_host, 'ostree-receive',
                     '--repo=%s' % self.remote_path]
         if self.verbose:
@@ -321,7 +321,7 @@ class OSTreePusher(object):
                                     'not "%s"' % url.scheme)
             self.remote_host = url.hostname
             self.remote_user = url.username
-            self.remote_repo = url.path
+            self.remote_path = url.path
             self.remote_port = url.port
         else:
             # Scp/git style remote (user@hostname:path)
